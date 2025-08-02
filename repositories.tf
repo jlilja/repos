@@ -35,7 +35,7 @@ module "nix-home" {
   source = "./modules/repository"
 
   name        = "nix-home"
-  description = ""
+  description = "Manage my non-server linux machines via Nix's Home Manager"
 
   visibility = local.PUBLIC
 
