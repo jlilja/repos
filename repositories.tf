@@ -3,6 +3,8 @@ module "repos" {
 
   name        = "repos"
   description = "Repository to manage my repositories via Terraform"
+
+  visibility = local.PUBLIC
 }
 
 module "index-on-linux" {
@@ -42,7 +44,7 @@ module "nix-home" {
   issues = true
 }
 
-import {
-  id = "nix-home"
-  to = module.nix-home.github_repository.repository_name
-}
+# import {
+#   id = "index-on-linux:main"
+#   to = module.index-on-linux.github_branch_protection.repository_branch_protection
+# }
