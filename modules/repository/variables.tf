@@ -16,3 +16,15 @@ variable "visibility" {
 
   default = "private"
 }
+
+variable "topics" {
+  type = set(string)
+
+  default = []
+}
+
+variable "issues" {
+  type = bool
+
+  default = false
+}
