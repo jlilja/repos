@@ -22,7 +22,8 @@ resource "github_branch_protection" "repository_branch_protection" {
   require_signed_commits = true
 
   required_pull_request_reviews {
-    dismiss_stale_reviews = true
-    restrict_dismissals   = true
+    dismiss_stale_reviews           = true
+    restrict_dismissals             = true
+    required_approving_review_count = 0
   }
 }
