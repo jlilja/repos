@@ -7,13 +7,6 @@ module "repos" {
   visibility = local.PUBLIC
 }
 
-module "index-on-linux" {
-  source = "./modules/repository"
-
-  name        = "index-on-linux"
-  description = "Notes on running Valve index VR kit on Linux"
-}
-
 module "infra" {
   source = "./modules/repository"
 
@@ -44,7 +37,16 @@ module "nix-home" {
   issues = true
 }
 
-# import {
-#   id = "index-on-linux:main"
-#   to = module.index-on-linux.github_branch_protection.repository_branch_protection
-# }
+module "bookie" {
+  source = "./modules/repository"
+
+  name        = "bookie"
+  description = "Automating firefox bookmarks as code"
+
+  visibility = local.PUBLIC
+
+  topics = [
+    "firefox",
+    "firefox-addon",
+  ]
+}
