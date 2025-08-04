@@ -5,8 +5,14 @@ resource "github_repository" "repository_name" {
   visibility  = var.visibility
 
   delete_branch_on_merge = true
-  has_issues             = var.issues
-  vulnerability_alerts   = var.visibility == "public" ? true : false
+
+  has_issues      = var.issues
+  has_discussions = false
+  has_downloads   = false
+  has_wiki        = false
+  has_projects    = false
+
+  vulnerability_alerts = var.visibility == "public" ? true : false
 }
 
 resource "github_branch_protection" "repository_branch_protection" {
