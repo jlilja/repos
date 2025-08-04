@@ -4,6 +4,8 @@ variable "name" {
 
 variable "description" {
   type = string
+
+  default = ""
 }
 
 variable "visibility" {
