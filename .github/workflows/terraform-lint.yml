@@ -1,0 +1,28 @@
+---
+name: Format Terraform code on push
+
+on:
+  push:
+    paths:
+      - "terraform/*.tf"
+
+env:
+  TF_IN_AUTOMATION: true
+
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Setup Taskfile
+        uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2.0.0
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 # v4.0.0
+
+      - name: Run terraform fmt check
+        run: task format

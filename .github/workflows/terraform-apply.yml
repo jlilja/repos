@@ -1,0 +1,43 @@
+---
+name: Apply Terraform code on main
+
+on:
+  pull_request:
+    paths:
+      - "terraform/**/*.tf"
+  workflow_dispatch:
+
+env:
+  TF_IN_AUTOMATION: true
+
+jobs:
+  apply:
+    name: Apply
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Setup Taskfile
+        uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2.0.0
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 # v4.0.0
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@ec61189d14ec14c8efccab744f656cffd0e33f37 # v6.1.0
+        with:
+          role-to-assume: arn:aws:iam::524080394605:role/TFGithubOIDC
+          aws-region: eu-north-1
+
+      - name: Terraform Init
+        id: init
+        run: task init
+
+      - name: Terraform Apply
+        id: apply
+        run: task apply
